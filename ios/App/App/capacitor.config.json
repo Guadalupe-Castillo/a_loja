@@ -1,0 +1,19 @@
+{
+	"appId": "a.loja",
+	"appName": "a_loja",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {},
+	"cordova": {},
+	"packageClassList": [
+		"BarcodeScannerPlugin",
+		"AppPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"StatusBarPlugin"
+	],
+	"server": {
+		"cleartext": true
+	}
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">a_loja</string>
+    <string name="title_activity_main">a_loja</string>
+    <string name="package_name">a.loja.dev.lupe</string>
+    <string name="custom_url_scheme">a.loja.dev.lupe</string>
+</resources>
