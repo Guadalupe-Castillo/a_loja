@@ -1,0 +1,277 @@
+/* Light Theme */
+:root {
+    --text-color: #000000; // Pure black text for light theme
+}
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #ffffff;
+    }
+}
+
+body {
+    color: var(--text-color); 
+}
+
+ion-header {
+    position: fixed;
+}
+
+ion-toolbar {
+    padding: 5px;
+}
+
+ion-segment-button {
+    color: var(--text-color); 
+}
+
+ion-segment-button.segment-button-checked {
+    color: grey; 
+    background-color: #0000003d;
+}
+
+ion-button img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+ion-card {
+    position: relative;
+    margin: 0px;
+    margin-top: 50px;
+    border-radius: 0%;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+ion-card-header {
+    padding-bottom: 5px;
+}
+
+ion-card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+ion-card-subtitle {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+ion-card-content {
+    font-size: 1em;
+    line-height: 1.5;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+ion-label {
+    margin-bottom: 0px;
+    font-weight: 400;
+    font-size: 25px;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1.5px solid black; // Use theme-based border color
+    color: var(--text-color); // Apply theme-based text color
+}
+
+th {
+    font-weight: bold;
+    color: white;
+    background-color: black; // Use theme-based background color
+}
+
+table p {
+    margin: 0;
+}
+
+strong {
+    font-family: 'Parkinsans', sans-serif;
+}
+
+ion-item {
+    font-size: 15px;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+input {
+    width: 85%;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+.image-container {
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.big-image {
+    width: 95%;
+    height: 90%;
+    max-height: 300px;
+    margin: 10px; 
+    border-radius: 15px;
+    object-fit: contain; 
+    background-color: white;
+}
+
+ion-segment {
+    width: 100%;
+}
+
+ion-segment-button {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+ion-item {
+    background-color: transparent;
+}
+
+ion-list {
+    background-color: transparent;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+}
+
+.thumbnail-container {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.thumbnail-container.selected {
+    box-shadow: 0 0px 1px 3px rgba(0, 17, 255, 0.80), 0 0px 1px 4px rgba(255, 255, 255, 0.662);
+    border-radius: 15px;
+}
+
+.thumbnail {
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.thumbnails ion-button {
+    width: 100%;
+}
+
+.thumbnails ion-button[disabled] {
+    opacity: 0.5;
+}
+
+.error-message {
+    color: var(--ion-color-danger); // Use theme-based danger color
+    text-align: center;
+    margin-top: 10px;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventario {
+    border-radius: 15px;
+    padding: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.inventario ion-card {
+    padding: 0px;
+}
+
+.inventario ion-card-content {
+    padding: 0px;
+}
+
+.inventario ion-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+.inventario table tr, .inventario table td {
+    padding: 0px;
+    align-items: center;
+}
+
+.inventario table input, .inventario table select {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+.inventario option {
+    background-color: var(--ion-background-color); // Use theme-based background color
+}
+
+.inventario input {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: var(--text-color); // Apply theme-based text color
+}
+
+table ion-button {
+    --background: transparent;
+}
+
+.dropdown ion-button {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--text-color); // Apply theme-based text color
+    justify-content: left;
+}
+
+.originais table {
+    background-color: black; // Use theme-based background color
+    font-weight: bold;
+    color: white; // Apply theme-based text color
+}
+
+.originais {
+    margin: 10px;
+}

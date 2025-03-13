@@ -1,0 +1,94 @@
+ion-header {
+    position: fixed;
+}
+
+ion-thumbnail img {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+ion-item{
+    --inner-padding-end: 0px;
+}
+
+ion-list ion-thumbnail{
+    height: 100%;
+    width: 25%;
+    margin-inline-start: -15px;
+}
+
+ion-list ion-button{
+    margin-inline-end: -5px;
+}
+
+ion-toolbar{
+    padding: 5px;
+}
+
+ion-card {
+    position: relative; 
+    --color: white;
+    margin: 0px;
+    margin-top: 50px;
+    border-radius: 0%;
+}
+
+ion-card-header {
+    padding-bottom: 5px;
+}
+
+ion-card-content {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+ion-label {
+    margin-bottom: 0px;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+strong {
+    font-family: 'Parkinsans', sans-serif;
+}
+
+ion-button{
+    width: 100%;
+    margin: 0px;
+    padding: 5px;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.backdrop ion-button{
+    width: 45%;
+}
+
+.backdrop input {
+    margin: 10px;
+}
+
+
+
+.alerta {
+    color: red;
+    font-weight: bold;
+}
+
+.apagar{
+    width:20%;
+    height: 40%;
+}

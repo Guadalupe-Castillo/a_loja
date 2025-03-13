@@ -1,0 +1,192 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <!--Boton para volver a la pagina principal-->
+      <ion-buttons slot="start">
+        <ion-button routerLink="../../pag-principal">
+          <ion-icon name="home"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <!--cambio de modo-->
+      <ion-segment [(ngModel)]="segmentValue" (onchange)="getLocalProducto(this.barcode)">
+        <ion-segment-button value="consulta">
+          Consulta
+        </ion-segment-button>
+        <ion-segment-button value="inventario">
+          Inventario
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--Modo Consulta-->
+  <ng-container *ngIf="segmentValue === 'consulta'">
+    <ion-card *ngFor="let artigo of artigos">
+      <ion-card-header>
+        <ion-card-title>{{ artigo.artigo }}</ion-card-title>
+        <ion-card-subtitle>
+          <span><strong>Codigo Interno:</strong> {{ artigo.idartigo }}</span>
+          <span><strong>Preço:</strong> {{ artigo.venda }}</span>
+        </ion-card-subtitle>
+        <div class="image-container">
+          <img [src]="'../../assets/'+this.barcode+'/'+this.selectedImg+'.jpg' || '../../assets/placeholder.jpg'" alt="Product Image" class="big-image" src="">
+          <div class="thumbnails">
+            <ng-container *ngFor="let image of img; let i = index">
+              <div class="thumbnail-container" [class.selected]="image === this.selectedImg">
+                <img [src]="'../../assets/'+this.barcode+'/'+image+'.jpg'" alt="Product Thumbnail" class="thumbnail" (click)="onChangeImg(image)">
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <ion-card-subtitle>
+          <span><strong>Modelo:</strong> {{ artigo.modelo }}</span>
+          <span><strong>em Loja:</strong> {{ artigo.stockloja }}</span>
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Quantidade:</strong> {{ artigo.qt }}</p>
+        <p><strong>Quantidade Reservada:</strong> {{ artigo.qtreservada }}</p>
+        <p><strong>Marca:</strong> {{ artigo.marcas_t.marca }}</p>
+        <p><strong>Codigo Interno:</strong> {{ artigo.codigointerno }}</p>
+        <p><strong>Fornecedor:</strong> {{ artigo.fornecedores_t.nome }}</p>
+        <p><strong>Categoria Principal:</strong> {{ artigo.categoriasartigos_t.categoriaprincipal }}</p>
+        <p><strong>EAN:</strong> {{ artigo.ean }}</p>
+        <p><strong>Familia:</strong> {{ artigo.familiasartigos_t.familia }}</p>
+        <p><strong>Subfamilia:</strong> {{ artigo.subfamilias_t.subfamilia }}</p>
+        <p><strong>Peso:</strong> {{ artigo.peso }} kg</p>
+        <ion-button expand="full" href="{{ artigo.artigowww_t.link }}">Pagina Web</ion-button>
+        <ion-button class="dropdown" expand="full" (click)="dropDown();"> Descrição</ion-button>
+        <div *ngIf="dropdown">
+          <p>{{ artigo.artigowww_t.descricaoartigo }}</p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Local</th>
+              <th>SubLocal</th>
+              <th>Posição</th>
+              <th>Qt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of dataOriginal">
+              <td>{{ data.localizacao_t.localizacao }}</td>
+              <td>{{ data.sublocalizacao_t.sublocalizacao }}</td>
+              <td>{{ data.posicao_t.posicao }}</td>
+              <td>{{ data.qtlocal }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="segmentValue === 'inventario'">
+    <ion-card *ngFor="let artigo of artigos">
+      <ion-card-header>
+        <ion-card-title>{{ artigo.artigo }}</ion-card-title>
+        <span><strong>Codigo Interno:</strong> {{ artigo.idartigo }}</span>
+      </ion-card-header>
+
+      <div class="originais">
+        <table>
+          <tbody>
+            <tr *ngFor="let data of dataOriginal">
+              <td>{{ data.localizacao_t.localizacao }}</td>
+              <td>{{ data.sublocalizacao_t.sublocalizacao }}</td>
+              <td>{{ data.posicao_t.posicao }}</td>
+              <td>{{ data.qtlocal }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ion-card-content class="inventario">
+        <form (ngSubmit)="editarLocais($event)">
+          <table>
+            <thead>
+              <tr>
+                <th>Local</th>
+                <th>SubLocal</th>
+                <th>Posição</th>
+                <th>Qt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let localArtigo of localizacoesArtigo; let i = index; trackBy: trackById">
+                <tr *ngIf="hideLocais[i] !== i">
+                  <td>
+                    <select id="localizacao" (change)="onChange($event, i, 'localizacao')">
+                      <ng-container *ngFor="let local of locais">
+                        <option *ngIf="local.idlocalizacao === localArtigo.idlocalizacao" value="{{local.idlocalizacao}}" selected>{{ local.localizacao }}</option>
+                        <option *ngIf="local.idlocalizacao !== localArtigo.idlocalizacao" value="{{local.idlocalizacao}}">{{ local.localizacao }}</option>
+                      </ng-container>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="sublocalizacao" (change)="onChange($event, i, 'sublocalizacao')">
+                      <ng-container *ngFor="let sublocal of sublocais[i].sublocais">
+                        <option *ngIf="sublocal.idsublocalizacao === localArtigo.idsublocalizacao" value="{{sublocal.idsublocalizacao}}" selected>{{ sublocal.sublocalizacao }}</option>
+                        <option *ngIf="sublocal.idsublocalizacao !== localArtigo.idsublocalizacao" value="{{sublocal.idsublocalizacao}}">{{ sublocal.sublocalizacao }}</option>
+                      </ng-container>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="posicao">
+                      <ng-container *ngFor="let posicao of posicoes[i].posicoes">
+                        <option *ngIf="posicao.idposicao === localArtigo.idposicao" value="{{posicao.idposicao}}" selected>{{ posicao.posicao }}</option>
+                        <option *ngIf="posicao.idposicao !== localArtigo.idposicao" value="{{posicao.idposicao}}">{{ posicao.posicao }}</option>
+                      </ng-container>
+                    </select>
+                  </td>
+                  <td><input type="number" id="qtLocal" placeholder="0" ></td>
+                  <td><ion-button (click)="onDelete(i)" ><ion-icon name="trash-outline"></ion-icon></ion-button></td>
+                </tr>
+              </ng-container>
+            </tbody>
+          <ion-button type="button" (click)="onAddLocais()"><ion-icon name="add-outline"></ion-icon></ion-button>
+          <ion-button expand="block" (click)="startScan()"><ion-icon name="aperture-outline"></ion-icon></ion-button>
+          </table>
+          <ion-button type="submit">Salvar</ion-button>
+          <ion-button type="button" (click)="onChange($event, 0,'delete'); segmentValue = 'consulta'">Cancelar</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+
+
+  <div class="backdrop" *ngIf="showConfirmar">
+    <ion-card>
+      <ion-card-content>
+        <h1>Alerta</h1>
+        <p>As seguintes localizações foram submetidas a 0 e não vão mudar de seu valor inicial:</p>
+        <ng-container *ngFor=" let data of dataEmZero">
+          <ion-list>
+            <ion-item>
+              Local : {{data.localizacao_t.localizacao}}, Sublocal : {{data.sublocalizacao_t.sublocalizacao}}, posição : {{data.posicao_t.posicao}}
+            </ion-item>
+          </ion-list>
+        </ng-container>
+
+        <ion-button type="submit" (click)="showConfirmar=false; confirmar = 'true'">Confirmar</ion-button>
+        <ion-button type="submit" (click)="showConfirmar=false; confirmar = 'false'">Cancelar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="backdrop" *ngIf = "isQtStock">
+    <ion-card >
+      <ion-card-content>
+        <h1>Alerta</h1>
+        <p>A quantidade em stock não é igual a quantidade</p>
+        <ion-button type="submit" (click)="isQtStock = false">Confirmar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+</ion-content>

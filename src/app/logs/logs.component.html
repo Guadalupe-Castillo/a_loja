@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="../pag-principal">
+        <ion-icon name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-label>Data</ion-label>
+    <select [(ngModel)]="dataEscolhida" name="data" id="data">
+      <option *ngFor="let option of datas" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>     
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content">
+  <ion-card>
+    <ion-list>
+      <ion-item *ngFor="let log of logs">
+        <ion-label>
+          <h2>Username: {{ log.profiles.username }}</h2>
+          <p>Data: {{ log.hora_modificacao?.replace('T', ' Hora: ') }}</p>
+          <p>Modificação: {{ log.modificacao }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <div *ngIf="errorMsg" class="error-message">{{ errorMsg }}</div>
+</ion-content>

@@ -1,0 +1,83 @@
+ion-toolbar {
+  --padding: 0px;
+}
+
+ion-toolbar img {
+  width:20%;
+}
+
+form {
+  display: flex; 
+  align-items: center;
+  padding: 2px;
+  width: 100%;
+}
+
+form ion-button {
+  --background: transparent;
+  box-shadow: none;
+  outline: none;
+  width: 10%;
+  height: auto;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  -webkit-margin-end: 5px;
+}
+
+form img{
+  width: 100%;
+  height: auto;
+  object-fit: cover; 
+}
+
+input {
+  height:100%;
+}
+
+ion-searchbar {
+  --width: auto;
+  --margin-top: 5px;
+  --padding: 0px;
+  flex: 1; 
+  margin-right: 5px;
+}
+
+ion-card {
+  height: 50%;
+  --background: transparent;
+  box-shadow: none;
+  top: 25%;
+  transform: translateY(-25%);
+}
+
+ion-card-content {
+  padding: 0px;
+  --background: transparent;
+  box-shadow: none;
+}
+
+.botones ion-button {
+  --border-radius: 15px;
+  --background: white;
+  color: rgb(52, 52, 52);
+  font-size: 25px;
+  margin: 2%;
+}
+
+div {
+  display: flex;
+}
+
+div ion-button {
+  font-size: 20px;
+  width: 50%;
+  height: 20%;
+}
+
+ion-button img {
+  width: 50%;
+}
+
+div img {
+  width: 70%;
+}

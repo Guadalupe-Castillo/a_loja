@@ -1,0 +1,79 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button routerLink="../../pag-principal">
+
+          
+        </ion-button>
+      </ion-buttons>
+      <ion-menu-toggle slot="end">
+        <ion-button><ion-icon name="menu-outline"></ion-icon></ion-button>
+      </ion-menu-toggle>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngFor="let localizacao of localizacao">
+    <ion-card-header>
+      <ion-card-title>Localização: {{ localizacao.localizacao_t.localizacao }} {{ localizacao.sublocalizacao_t.sublocalizacao }} {{ localizacao.posicao_t.posicao }}</ion-card-title>
+      <ion-card-subtitle>
+        <span><strong>Codigo Interno:</strong> {{ localizacao.idlocalizacaoartigos }}</span>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let artigo of artigos; let i = index;" >
+          <ion-thumbnail slot="start">
+            <img [src]="'../../assets/'+this.artigo.idartigo+'/1.jpg'" alt="Artigo">
+          </ion-thumbnail>
+            <ion-label>
+              <h2>{{ artigo.artigo }}</h2>
+              <p>Codigo interno: {{ artigo.idartigo }}</p>
+              <p>Quantidade: {{ artigo.qt }}</p>
+              <p>Stock: {{ artigo.stockloja }}</p>
+              <p *ngIf = "artigo.localizacaoartigos_t[0]['etiqueta'] !== 0" class="alerta"> Precisa de {{ artigo.localizacaoartigos_t[0]['etiqueta'] }} etiquetas</p>
+              <ion-button (click)="etiquetas = true; this.idartigo = artigo.idartigo; this.index = i">Etiqueta</ion-button> <br>
+              <ion-button (click)="goToArtigoPage(artigo.idartigo)">Ver artigo</ion-button>
+            </ion-label>
+          <br>
+          <ion-button class="apagar" (click)="deleteArtigoLocal(artigo.idartigo)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button (click)="startScan(adicionar)">
+        <ion-icon name="aperture"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="backdrop" *ngIf="validar">
+    <ion-card>
+      <ion-card-content>
+        <h1>Adicionar artigo a localização:</h1>
+        <form (ngSubmit)="confirmacao = true; validar = false; this.qt = $event.target.elements.qt.value">
+          <input type="number" id="qt" name="qt" placeholder="1">
+          <br>
+          <ion-button type="submit">Confirmar</ion-button>
+          <ion-button type="button" (click)="validar = false; confirmacao = false">Cancelar</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  
+  <div class="backdrop" *ngIf="etiquetas">
+    <ion-card>
+      <ion-card-content>
+        <h1>Quantas etiquetas precisa?</h1>
+        <form (ngSubmit)="addEtiquetas($event, true); etiquetas = false">
+          <input type="number" id="qt" name="qt" placeholder="1">
+          <br>
+          <ion-button type="submit">Confirmar</ion-button>
+          <ion-button type="button" (click)="etiquetas = false;">Cancelar</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

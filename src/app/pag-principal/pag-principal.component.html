@@ -1,0 +1,38 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button routerLink="home">Sair</ion-button>
+      </ion-buttons>
+      <form (submit)="onSearch($event)">
+        <ion-searchbar id="search" placeholder="Procurar artigo"></ion-searchbar>
+      </form>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="botones">
+    <ion-card-content>
+      <ion-button expand="block" style="height: 20%;" (click)="startScan('artigo')">
+        <img src="../../assets/procurar-img.png" alt="">
+        <br>
+        Procurar
+      </ion-button>
+      <div>
+        <ion-button routerLink="../recolha">
+          <img src="../../assets/recolher-img.png" alt="">
+        </ion-button>
+
+        <ion-button routerLink="../venda">
+          <img src="../../assets/compra-img.png" alt="">
+        </ion-button>
+      </div>
+      <div>
+        <ion-button routerLink="../logs" expand="block">
+          Logs
+        </ion-button>
+        <ion-button expand="block" (click)="startScan('localizacoes')">
+          Inventario
+        </ion-button>        
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

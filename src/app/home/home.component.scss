@@ -1,0 +1,21 @@
+/* Light Theme */
+:root {
+    --text-color: #000000; // Pure black text for light theme
+}
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #ffffff;
+    }
+}
+
+ion-label { 
+    color: var(--text-color);
+    font-size: large;
+}
+
+ion-button{ 
+    color:var(--text-color);
+    font-size: large;
+}
